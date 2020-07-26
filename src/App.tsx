@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {createMuiTheme} from "@material-ui/core";
+import {ThemeProvider} from '@material-ui/styles';
+import NewsFeed from "./components/NewsFeed"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path={'/'} component={NewsFeed}/>
+                </Switch>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
 }
+
+const theme = createMuiTheme({
+        palette: {
+            type: "dark",
+            primary: {
+                main: '#62efff',
+            },
+            secondary: {
+                main: '#88ffff'
+            },
+            text: {
+                primary: '#e0f2f1'
+            },
+        },
+        typography: {
+            fontFamily: [
+                'Crimson Text', 'serif'
+            ].join(','),
+        }
+    }
+);
 
 export default App;
