@@ -1,24 +1,35 @@
 import React from "react";
 import './NewsCard.scss';
-import {Box, Card, CardContent, Typography, CardMedia} from '@material-ui/core';
+import {Box, Card, CardContent, CardMedia, Tooltip, Typography} from '@material-ui/core';
 import {NewsModel} from "../../../models/newsModel";
+import {truncateAndEllipsis} from "../../../utils/utils";
 
 interface NewsCardProps {
     article: NewsModel;
+    onClick: () => void;
 }
 
 const NewsCard: React.FC<NewsCardProps> = (props: NewsCardProps) => {
     return (
-        <Box className={'article-card-container'}>
-            <Card>
+        <Box className={'article-card-container'} key={props.article.id}>
+            <Card style={{height: "100%"}}>
                 <CardMedia image={props.article.urlToImage}/>
-                <CardContent>
-                    <Typography variant={"h3"} color={"secondary"}>{props.article.title}</Typography>
-                    <Typography variant={"h5"}>{props.article.source?.name}</Typography>
-                    <Typography variant={"h6"}>{props.article.description}</Typography>
-                    <Typography variant={"h6"}>{props.article.author}</Typography>
-                    <Typography variant={"h6"}>{props.article.content}</Typography>
-                </CardContent>
+                <Tooltip placement={"top"} title={<Typography variant={"h5"}>{props.article.title || ""}</Typography>}>
+                    <CardContent onClick={props.onClick}
+                                 style={{
+                                     display: "flex",
+                                     flexDirection: "column",
+                                     justifyContent: "space-between",
+                                     height: "40%"
+                                 }}>
+                        <div>
+                            <Typography variant={"h4"}
+                                        color={"secondary"}>{truncateAndEllipsis(props.article.title, 20)}</Typography>
+                            <Typography variant={"h5"}>Source: {props.article.source?.name}</Typography>
+                        </div>
+                        <Typography variant={"h6"} align={"right"}>By {truncateAndEllipsis(props.article.author, 20)}</Typography>
+                    </CardContent>
+                </Tooltip>
             </Card>
         </Box>
     );

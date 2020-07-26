@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const APIName = 'http://newsapi.org/v2/';
-const APIKey = '&apiKey=78ebcadeb72c4050b9f5e3c3914c1058';
+const key = process.env.REACT_APP_NEWS_API_KEY
+const APIKey = `&apiKey=${key}`;
 
 class ApiService {
     static getInstance(): ApiService {

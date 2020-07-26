@@ -9,13 +9,11 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <RecoilRoot>
-                <React.Suspense fallback={<div>Loading...</div>}>
-                    <BrowserRouter>
-                        <Switch>
-                            <Route exact path={'/'} component={NewsFeed}/>
-                        </Switch>
-                    </BrowserRouter>
-                </React.Suspense>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path={'/'} component={NewsFeed}/>
+                    </Switch>
+                </BrowserRouter>
             </RecoilRoot>
         </ThemeProvider>
     );

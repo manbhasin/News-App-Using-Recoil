@@ -4,7 +4,7 @@ export type Source = {
 }
 
 export interface NewsModel {
-    id: number | string | undefined;
+    id: string;
     source?: Source;
     author?: string;
     title?: string;

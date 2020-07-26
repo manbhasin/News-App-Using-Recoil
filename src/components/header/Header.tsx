@@ -6,7 +6,7 @@ const Header: React.FC = () => {
     return (
         <Box className={'app-bar'}>
             <div className={'header-heading'}>
-                <Typography variant={"h3"} color={"primary"}>React News App</Typography>
+                <Typography variant={"h3"} color={"primary"}>React News App Using Recoil.JS</Typography>
             </div>
         </Box>
     );
