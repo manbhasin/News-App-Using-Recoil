@@ -27,7 +27,7 @@ const NewsCard: React.FC<NewsCardProps> = (props: NewsCardProps) => {
                                         color={"secondary"}>{truncateAndEllipsis(props.article.title, 20)}</Typography>
                             <Typography variant={"h5"}>Source: {props.article.source?.name}</Typography>
                         </div>
-                        <Typography variant={"h6"} align={"right"}>By {truncateAndEllipsis(props.article.author, 20)}</Typography>
+                        <Typography variant={"h6"} align={"right"}>By {truncateAndEllipsis(props.article.author, 40)}</Typography>
                     </CardContent>
                 </Tooltip>
             </Card>

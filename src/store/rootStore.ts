@@ -21,4 +21,9 @@ export const selectedNews = selector({
 
         return newsList.find((item: NewsModel) => item.id === id)
     }
-})
+});
+
+export const openFilterModalState = atom({
+    key: "openFilterModalState",
+    default: false
+});
