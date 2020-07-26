@@ -1,17 +1,22 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {RecoilRoot} from "recoil";
 import {createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from '@material-ui/styles';
-import NewsFeed from "./components/NewsFeed"
+import NewsFeed from "./components/news/NewsFeed"
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path={'/'} component={NewsFeed}/>
-                </Switch>
-            </BrowserRouter>
+            <RecoilRoot>
+                <React.Suspense fallback={<div>Loading...</div>}>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route exact path={'/'} component={NewsFeed}/>
+                        </Switch>
+                    </BrowserRouter>
+                </React.Suspense>
+            </RecoilRoot>
         </ThemeProvider>
     );
 }
