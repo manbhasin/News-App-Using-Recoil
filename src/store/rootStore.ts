@@ -19,7 +19,7 @@ export const selectedNews = selector({
         const newsList = get(newsState);
         const id = get(selectedNewsKey);
 
-        return newsList.find((item: NewsModel) => item.id === id)
+        return newsList.length > 0 ? newsList.find((item: NewsModel) => item.id === id) : undefined
     }
 });
 

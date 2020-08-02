@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {RecoilRoot} from "recoil";
 import {createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from '@material-ui/styles';
-import NewsFeed from "./components/news/NewsFeed"
+import APIKeyManager from "./components/api-key-manager/APIKeyManager";
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
             <RecoilRoot>
                 <BrowserRouter>
                     <Switch>
-                        <Route exact path={'/'} component={NewsFeed}/>
+                        <Route exact path={'/'} component={APIKeyManager}/>
                     </Switch>
                 </BrowserRouter>
             </RecoilRoot>

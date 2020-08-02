@@ -16,46 +16,58 @@ import {NewsModel} from "../../models/newsModel";
 import NewsCard from "./news-card/NewsCard";
 import NewsDetailModal from "../news-detail-modal/NewsDetailModal";
 import FilterNewsModal from "../filters-modal/FilterNewsModal";
+import ErrorWrapper from "../error-wrapper/ErrorWrapper";
 
 const NewsFeed: React.FC = () => {
-    const [news, setNews] = useRecoilState(newsState);
     const [newsLoading, setNewsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<any>();
+    const [news, setNews] = useRecoilState(newsState);
     const [newsKey, setNewsKey] = useRecoilState(selectedNewsKey);
     const [filterModal, setFilterModal] = useRecoilState(openFilterModalState);
-    const [area, setArea] = useRecoilState(filterNewsArea)
+    const [area, setArea] = useRecoilState(filterNewsArea);
     const article = useRecoilValue(selectedNews);
-    const [pageSize, setPageSize] = useRecoilState(filterPageSize)
+    const [pageSize, setPageSize] = useRecoilState(filterPageSize);
 
     useEffect(() => {
         setNewsLoading(true);
         if (news.length > 0) {
             setNews([])
         }
-        const fetchNews = async () => {
-            const response: NewsModel[] = await newsService.getNews(area, pageSize);
+
+        newsService.getNews(area, pageSize).then((response) => {
             setNews(response);
-        }
-        fetchNews().then(() => setNewsLoading(false))
+            setNewsLoading(false)
+        }).catch((error: any) => {
+            setError(error)
+            setNewsLoading(false)
+        })
+
     }, [area, pageSize]);
 
     return (
         <DashboardContainer>
             {
-                newsLoading ? (
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        <CircularProgress/>
-                    </div>
-                ) : (
-                    <Box className={'news-container'}>
-                        {news.map((item: NewsModel) => {
-                            return (
-                                <div key={item.id}>
-                                    <NewsCard article={item} onClick={() => setNewsKey(item.id)}/>
+                !error ?
+                    <>
+                        {
+                            newsLoading ? (
+                                <div style={{display: "flex", justifyContent: "center"}}>
+                                    <CircularProgress/>
                                 </div>
+                            ) : (
+                                <Box className={'news-container'}>
+                                    {news.length > 0 && news.map((item: NewsModel) => {
+                                        return (
+                                            <div key={item.id}>
+                                                <NewsCard article={item} onClick={() => setNewsKey(item.id)}/>
+                                            </div>
+                                        )
+                                    })}
+                                </Box>
                             )
-                        })}
-                    </Box>
-                )
+                        }
+                    </>
+                    : <ErrorWrapper error={error}/>
             }
             <NewsDetailModal
                 selectedArticle={article}

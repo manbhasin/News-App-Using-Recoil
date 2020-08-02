@@ -1,8 +1,6 @@
 import axios from "axios";
 
 const APIName = 'http://newsapi.org/v2/';
-const key = process.env.REACT_APP_NEWS_API_KEY
-const APIKey = `&apiKey=${key}`;
 
 class ApiService {
     static getInstance(): ApiService {
@@ -10,7 +8,7 @@ class ApiService {
     }
 
     async get<T>(relativePath: string, config?: any): Promise<T> {
-        return axios.get(APIName + relativePath + APIKey);
+        return axios.get(APIName + relativePath);
     }
 }
 
