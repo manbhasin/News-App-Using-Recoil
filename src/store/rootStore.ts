@@ -27,3 +27,13 @@ export const openFilterModalState = atom({
     key: "openFilterModalState",
     default: false
 });
+
+export const filterNewsArea = atom({
+    key: "filterNewsArea",
+    default: "technology"
+})
+
+export const filterPageSize = atom({
+    key: "pageSize",
+    default: 10
+})

@@ -7,8 +7,8 @@ class NewsService {
         return new NewsService();
     }
 
-    async getNews(): Promise<NewsModel[]> {
-        return await apiService.get<any[]>('everything?q=technology').then((res: any) => {
+    async getNews(area: string, pageSize: number): Promise<NewsModel[]> {
+        return await apiService.get<any[]>(`everything?q=${area}&pageSize=${pageSize}`).then((res: any) => {
             return res.data.articles.map((article: any) => {
                 return {
                     id: uuid(),

@@ -1,19 +1,18 @@
 import React from "react";
 import {Dialog, DialogContent, DialogTitle, Link, Typography} from "@material-ui/core";
-import {useRecoilValue} from "recoil";
-import {selectedNews} from "../../store/rootStore";
 import "./NewsModal.scss";
+import {NewsModel} from "../../models/newsModel";
 
 const moment = require("moment");
 
 interface NewsDetailModalProps {
     visible: boolean;
     onClose: () => void;
+    selectedArticle: NewsModel | undefined;
 }
 
 const NewsDetailModal: React.FC<NewsDetailModalProps> = (props: NewsDetailModalProps) => {
-    const article = useRecoilValue(selectedNews);
-
+    const {selectedArticle: article} = props;
     return (
         <Dialog open={props.visible} onClose={props.onClose}>
             <DialogTitle>
