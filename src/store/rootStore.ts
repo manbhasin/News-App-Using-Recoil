@@ -35,5 +35,5 @@ export const filterNewsArea = atom({
 
 export const filterPageSize = atom({
     key: "pageSize",
-    default: 10
+    default: 20
 })
